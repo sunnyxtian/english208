@@ -1,0 +1,21 @@
+/**
+  Sunny Tian
+  2/28/24
+  This is the style sheet for my english 208 website.
+*/
+
+body {
+  background-color: rgb(221, 255, 67);
+  font-family: 'Space Mono', monospace;
+}
+
+footer {
+  position: fixed;
+  margin: auto;
+  bottom: 0;
+  z-index: 10;
+}
+
+footer p {
+  display: inline;
+}
