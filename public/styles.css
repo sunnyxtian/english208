@@ -5,13 +5,15 @@
 */
 
 body {
+  width: 90%;
+  margin: auto;
   background-color: rgb(221, 255, 67);
   font-family: 'Space Mono', monospace;
 }
 
 footer {
   position: fixed;
-  margin: auto;
+  padding-bottom: 20px;
   bottom: 0;
   z-index: 10;
 }
