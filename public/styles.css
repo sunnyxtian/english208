@@ -8,20 +8,16 @@ body {
   width: 90%;
   margin: auto;
   background-color: rgb(239, 150, 220);
-  font-family: 'Space Mono', monospace;
+  font-family: 'Inter', sans-serif;
 }
 
-header, footer {
+footer, header {
   font-size: 10pt;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
-footer {
-  position: fixed;
-  padding-bottom: 20px;
-  bottom: 0;
-  z-index: 10;
-}
-
-footer p {
+footer p, header p {
   display: inline;
 }
