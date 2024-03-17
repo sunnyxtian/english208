@@ -9,6 +9,15 @@ body {
   margin: auto;
   background-color: rgb(255, 234, 250);
   text-align: center;
+
+  overflow-x: hidden;
+
+  /* background: url(img/feb1.png) left bottom no-repeat, rgb(255, 234, 250) */
+  /* background-size: 50px, 130px, auto; */
+}
+
+img {
+  opacity: 90%;
 }
 
 body, button {
@@ -19,14 +28,14 @@ h1 {
   font-size: 44pt;
 }
 
-header {
+header, .stats {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
 
 button {
-  font-size: 14pt;
+  font-size: 12pt;
 }
 
 header p {
@@ -39,8 +48,43 @@ button {
   text-decoration: underline;
 }
 
-#next {
-  padding-bottom: 4em;
+button a {
+  color: black;
+}
+
+.stats {
+  width: 60%;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.stats div {
+  padding: 5%;
+}
+
+.happiness h3 {
+  font-weight: bold;
+}
+
+.happiness p {
+  font-size: 16pt;
+  display: block;
+}
+
+#pols {
+  padding: 5px;
+  padding-left: 60%;
+  width: 30%;
+}
+
+#cd {
+  padding: 5px;
+  padding-right: 40%;
+  width: 20%
+}
+
+.flush {
+  padding: 20px;
   position: absolute;
   bottom: 0;
   left: 47%;
@@ -48,4 +92,34 @@ button {
 
 .hidden {
   display: none;
+}
+
+.img-grid {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+
+.img-grid img {
+  width: 30%;
+  height: 30%;
+}
+
+.feb {
+  background-color: rgb(255, 217, 189);
+}
+
+.jan {
+  background-color: rgb(172, 194, 194);
+}
+
+.jan iframe {
+  mix-blend-mode: overlay;
+}
+
+iframe {
+  mix-blend-mode: multiply;
 }
