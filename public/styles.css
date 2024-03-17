@@ -162,6 +162,10 @@ button a {
   mix-blend-mode: darken;
 }
 
+.aug {
+  background-color: rgb(255, 205, 243);
+}
+
 iframe {
   opacity: 90%;
 }
