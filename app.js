@@ -70,12 +70,58 @@ app.get("/getTopSongs", async(req, res) => {
   }
 });
 
+app.get("/getHappinessScore", async(req, res) => {
+  let month = req.query.month;
+  try {
+    let data = await getTopSongsByMonth(month);
+    let happinessScore = calculateHappinessScore(data);
+    res.type("text").send(happinessScore);
+  } catch (err) {
+    console.log(err);
+    res.type(SERVER_ERROR).type("text")
+      .send(SERVER_ERR_MSG);
+  }
+});
+
+app.get("/getSongDetails", async(req, res) => {
+  let song = req.query.song;
+  let artist = req.query.artist;
+
+  try {
+    let result = await getSongFeatures(artist, song);
+    res.json(result);
+  } catch (err) {
+    console.log(err);
+    res.type(SERVER_ERROR).type("text")
+      .send(SERVER_ERR_MSG);
+  }
+});
+
+function calculateHappinessScore(songs) {
+
+  let totalPlays = 0;
+  let totalScore = 0;
+
+  for (let i = 0; i < songs.length; i++) {
+    let currSong = songs[i];
+
+    let numPlays = currSong.plays;
+    totalPlays += numPlays;
+
+    let valence = currSong.valence;
+    totalScore += (valence * numPlays);
+  }
+
+  return "" + totalScore/totalPlays;
+
+}
+
 async function getTopSongsByMonth(month) {
   let num = parseInt(month);
   try {
     let db = await getDbConnection();
     let query = `
-      SELECT artist, song, plays, valence, tempo, danceability, energy
+      SELECT artist, song, plays, valence
       FROM topScrobbles2022
       WHERE month = ?
     `

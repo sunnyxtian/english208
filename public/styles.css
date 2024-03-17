@@ -83,6 +83,11 @@ button a {
   width: 20%
 }
 
+.overall {
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+
 .more-songs div h4, .more-songs div p {
   display: inline;
 }

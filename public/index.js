@@ -13,35 +13,35 @@ const pages = ["home", "jan", "feb", "march", "april", "may", "june", "july",
   window.addEventListener("load", init);
 
   function init() {
-    let populateBtn = id("pop");
-    populateBtn.addEventListener("click", populate);
+    // let populateBtn = id("pop");
+    // populateBtn.addEventListener("click", populate);
   }
 
-  async function populate() {
-    try {
-      let topSongs = await fetchTopSongs('1'); // manually change for each month
-      showTopSongs(topSongs);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // async function populate() {
+  //   try {
+  //     let topSongs = await fetchTopSongs('1'); // manually change for each month
+  //     showTopSongs(topSongs);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
-  function showTopSongs(data) {
-    // manipulate dom
-    console.log(data);
-  }
+  // function showTopSongs(data) {
+  //   // manipulate dom
+  //   console.log(data);
+  // }
 
-  async function fetchTopSongs(month) {
-    try {
-      let response = await fetch(`/getTopSongs?month=${month}`);
-      if (response.ok) {
-        let topSongs = await response.json();
-        return topSongs;
-      }
-    } catch (err) {
-      return err;
-    }
-  }
+  // async function fetchTopSongs(month) {
+  //   try {
+  //     let response = await fetch(`/getTopSongs?month=${month}`);
+  //     if (response.ok) {
+  //       let topSongs = await response.json();
+  //       return topSongs;
+  //     }
+  //   } catch (err) {
+  //     return err;
+  //   }
+  // }
 
   /**
    * Returns a new node element according to the given tag name.
