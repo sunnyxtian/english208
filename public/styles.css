@@ -8,16 +8,43 @@ body {
   width: 90%;
   margin: auto;
   background-color: rgb(255, 234, 250);
+}
+
+body, button {
   font-family: 'Space Grotesk', monospace;
 }
 
-footer, header {
-  font-size: 10pt;
+h1 {
+  font-size: 44pt;
+}
+
+header {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
 
-footer p, header p {
+header button {
+  font-size: 14pt;
+}
+
+header p {
   display: inline;
+}
+
+button {
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+#next {
+  padding-bottom: 2em;
+  position: absolute;
+  bottom: 0;
+
+}
+
+.hidden {
+  display: none;
 }

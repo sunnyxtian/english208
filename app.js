@@ -26,37 +26,20 @@ const SERVER_ERR_MSG = "Server error";
 const PARAM_ERROR = 400;
 const HOST_NUM = 8080;
 
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
+   "Oct", "Nov", "Dec"];
+const years = ["2020", "2021", "2022", "2023", "2024"];
+
 const clientId = "0cd9f63ddd624c138c97ccb8a3f69f16";
 const clientSecret = "4ed9dec813da4ed28e6cb447031cdc1b";
 
-app.get("/analyzeScrobbles", async (req, res) => {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
-   "Oct", "Nov", "Dec"];
-  const years = ["2020", "2021", "2022", "2023", "2024"];
-
+app.get("/details2022", async (req, res) => {
   try {
-    for (let i = 0; i < years.length; i++) {
-      let year = years[i];
-      for (let j = 0; j < months.length; j++) {
-        let month = months[j];
-
-        let result = await getScrobblesByMonth(month, year); // gets this month's scrobbles
-        console.log(month + " " +  year);
-
-        if (result.length > 0) {
-          // pass result into a counting method
-          // make a new table for the top 20 songs
-          // give each table to the spotify api
-            // add valence and tempo to each table.
-          let parsed = result.json();
-          await insertIntoDatabase(parsed);
-        }
-      }
-    }
-
+    await addDetails2022();
+    console.log("done");
   } catch (err) {
     console.log(err);
-    res.status(SERVER_ERROR).type("text")
+    res.type(SERVER_ERROR).type("text")
       .send(SERVER_ERR_MSG);
   }
 });
@@ -100,7 +83,7 @@ async function searchSong(accessToken, songName, artistName) {
   return data.tracks.items[0];
 }
 
-// Function to get track features
+// fetches the track features from the given id from spotify.
 async function getTrackFeatures(accessToken, trackId) {
   const url = `https://api.spotify.com/v1/audio-features/${trackId}`;
 
@@ -114,22 +97,30 @@ async function getTrackFeatures(accessToken, trackId) {
   return data;
 }
 
-(async () => {
+// returns an object with the given song's valence, tempo, danceability, energy
+async function getSongFeatures (artist, song) {
   const accessToken = await getAccessToken();
-  // console.log(accessToken);
 
-  // search through each song
+  let songData = await searchSong(accessToken, song, artist);
 
-  const trackData = await searchSong(accessToken, "The hours", "Beach House");
+  if (songData) {
+    let songId = songData.id;
 
-  if (trackData) {
-    const trackId = trackData.id;
-    const features = await getTrackFeatures(accessToken, trackId);
-    console.log(`Valence of "${trackData.name}" by "${trackData.artists[0].name}": ${features.valence}`);
+    let response = await getTrackFeatures(accessToken, songId);
+
+    let features = {
+      valence : response.valence,
+      tempo : response.tempo,
+      dance : response.danceability,
+      energy : response.energy
+    }
+
+    return features;
+
   } else {
-    console.log('Song not found.');
+    return;
   }
-})();
+}
 
 async function getScrobblesByMonth(month, year) {
   let searchTerm = month + " " + year;
@@ -146,6 +137,48 @@ async function getScrobblesByMonth(month, year) {
     return scrobbles;
   } catch (err) {
     console.log(err);
+    throw err;
+  }
+}
+
+async function addDetails2022() {
+  try {
+    let db = await getDbConnection();
+    let query = `
+      SELECT artist, song
+      FROM topScrobbles2022
+    `;
+
+    let topSongs = await db.all(query);
+
+    for (let i = 0; i < topSongs.length; i++) {
+      let artist = topSongs[i].artist;
+      let song = topSongs[i].song;
+      await addSongDetails(artist, song);
+    }
+    await db.close();
+    console.log("done");
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function addSongDetails(artist, song) {
+  try {
+    let details = await getSongFeatures(artist, song);
+    if (details) {
+      let db = await getDbConnection();
+      let query = `
+        UPDATE topScrobbles2022
+        SET valence = ?, tempo = ?, danceability = ?, energy = ?
+        WHERE artist = ? AND song = ?
+      `;
+      await db.run(query, details.valence, details.tempo, details.dance, details.energy, artist, song);
+      await db.close();
+    } else {
+      return;
+    }
+  } catch (err) {
     throw err;
   }
 }

@@ -10,6 +10,6 @@
   window.addEventListener("load", init);
 
   function init() {
-    // do some stuff
+    
   }
 })
