@@ -134,5 +134,5 @@ button a {
 }
 
 iframe {
-  mix-blend-mode: multiply;
+  opacity: 90%;
 }
