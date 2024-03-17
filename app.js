@@ -56,6 +56,37 @@ app.get("/getScrobbles", async (req, res) => {
   }
 });
 
+/** Returns the top 10 songs from a given month, to be displayed on the webpage. */
+app.get("/getTopSongs", async(req, res) => {
+  let month = req.query.month;
+
+  try {
+    let result = await getTopSongsByMonth(month);
+    res.json(result);
+  } catch (err) {
+    console.log(err);
+    res.type(SERVER_ERROR).type("text")
+      .send(SERVER_ERR_MSG);
+  }
+});
+
+async function getTopSongsByMonth(month) {
+  let num = parseInt(month);
+  try {
+    let db = await getDbConnection();
+    let query = `
+      SELECT artist, song, plays, valence, tempo, danceability, energy
+      FROM topScrobbles2022
+      WHERE month = ?
+    `
+    let result = await db.all(query, num);
+    await db.close();
+    return result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function getAccessToken() {
   const response = await fetch('https://accounts.spotify.com/api/token', {
     method: "POST",

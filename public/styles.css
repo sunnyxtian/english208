@@ -83,6 +83,10 @@ button a {
   width: 20%
 }
 
+.more-songs div h4, .more-songs div p {
+  display: inline;
+}
+
 .flush {
   padding: 20px;
   position: absolute;

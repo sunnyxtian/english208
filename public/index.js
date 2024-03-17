@@ -13,24 +13,35 @@ const pages = ["home", "jan", "feb", "march", "april", "may", "june", "july",
   window.addEventListener("load", init);
 
   function init() {
-    let nextBtn = id("next");
-    nextBtn.addEventListener("click", switchPage);
+    let populateBtn = id("pop");
+    populateBtn.addEventListener("click", populate);
   }
 
-  // function switchPage() {
-  //   for (let i = 0; i < pages.length; i++) {
-  //     if (id(i.toString())) {
-  //       id(i.toString()).classList.add("hidden");
+  async function populate() {
+    try {
+      let topSongs = await fetchTopSongs('1'); // manually change for each month
+      showTopSongs(topSongs);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  //       if (i == 13) {
-  //         id("0").classList.remove("hidden");
-  //       } else {
-  //         console.log("hello");
-  //         id((i+1).toString()).classList.remove("hidden");
-  //       }
-  //     }
-  //   }
-  // }
+  function showTopSongs(data) {
+    // manipulate dom
+    console.log(data);
+  }
+
+  async function fetchTopSongs(month) {
+    try {
+      let response = await fetch(`/getTopSongs?month=${month}`);
+      if (response.ok) {
+        let topSongs = await response.json();
+        return topSongs;
+      }
+    } catch (err) {
+      return err;
+    }
+  }
 
   /**
    * Returns a new node element according to the given tag name.
