@@ -8,6 +8,7 @@ body {
   width: 90%;
   margin: auto;
   background-color: rgb(255, 234, 250);
+  text-align: center;
 }
 
 body, button {
@@ -24,7 +25,7 @@ header {
   justify-content: space-between;
 }
 
-header button {
+button {
   font-size: 14pt;
 }
 
@@ -39,10 +40,10 @@ button {
 }
 
 #next {
-  padding-bottom: 2em;
+  padding-bottom: 4em;
   position: absolute;
   bottom: 0;
-
+  left: 47%;
 }
 
 .hidden {
