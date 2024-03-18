@@ -166,6 +166,10 @@ button a {
   background-color: rgb(255, 205, 243);
 }
 
+.sep {
+  background-color: floralwhite;
+}
+
 iframe {
   opacity: 90%;
 }
