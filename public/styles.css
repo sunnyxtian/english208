@@ -148,10 +148,11 @@ button a {
 
 .jun {
   background-color: rgb(155, 254, 254);
+  color:rgb(19, 19, 228);
 }
 
 .jun iframe {
-  mix-blend-mode: lighten;
+  mix-blend-mode: screen;
 }
 
 .jul {
@@ -180,6 +181,17 @@ button a {
   color:rgb(122, 101, 62);
 }
 
+.dec {
+  background-color: azure;
+  color: cornflowerblue;
+}
+
+.end {
+  background-color:rgb(240, 203, 203);
+  color: rgb(179, 81, 46);
+}
+
 iframe {
   opacity: 90%;
+  padding: 10px;
 }
