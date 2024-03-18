@@ -23,5 +23,57 @@
       <button><a href="about.html">about</a></button>
     </header>
 
-</body>
+    <section>
+      <h1>about</h1>
+      <h2>What is this?</h2>
+      <p>
+        This website is meant to guide you through a tour of what I listened to in 2022,
+        in order to shed light on music's relationship to our mood.
+        Each page summarizes a month's worth of my top songs, gives a happiness score
+        to each top song, and an overall happiness score for the month.
+      </p>
+
+      <h2>How is the happiness score calculated?</h2>
+      <p>
+        I used the <a href="https://developer.spotify.com/">spotify api</a> to get the
+        happiness score for each song. Spotify assigns numbers to represent features of
+        each song in their catalogue. Some of the features include: valence (aka happiness),
+        tempo, danceability, and speechiness.
+        They calculate these features computationally, using a variety of traits about a song,
+        such as the loudness, key, and vocals.
+      </p>
+      <p>
+        The happiness score ranges from 0 to 1. A score close to 0 indicates that the song was
+        percieved by Spotify to be sad. A score close to 1 indicates a song that is happier.
+        Since the happiness of a song is subjective, we should take spotify's rating with a
+        grain of salt. The analysis done in this website is meant to be a jumping off point
+        for discussion about music's affect on our mood.
+      </p>
+      <p>
+        The happiness score for each song was taken directly from spotify's database.
+        The overall happiness score for each month was done by weighting each song's score by
+        the number of times it was played. Then the sum of these scores was divided by the total
+        number of plays across all 10 top songs. The average happiness score was calculated
+        by taking the mean of the overall happiness scores for all 12 months of 2022.
+      </p>
+
+      <h2>Sources</h2>
+      <p><a href="https://developer.spotify.com/">spotify api</a></p>
+      <p>
+        I used data from the Spotify API to get the happiness scores for each song.
+        Spotify also enabled me to embed each song into the website.
+      </p>
+
+      <p><a href="https://developers.google.com/youtube/v3">youtube api</a></p>
+      <p>I used this API to embed youtube videos into the website.</p>
+
+      <p><a href="https://www.penguinrandomhouse.com/books/298964/this-is-your-brain-on-music-by-daniel-j-levitin/">This is Your Brain on Music by Daniel J. Levitin</a></p>
+      <p>Reading this book made me interested in music's affect on our emotions.</p>
+
+      <p><a href="fonts.google.com">fonts.google.com</a></p>
+      <a>This website uses the space grotesk font from Google Fonts.</a>
+
+      <p>Other material created by myself.</p>
+    </section>
+  </body>
 </html>
