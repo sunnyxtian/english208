@@ -170,6 +170,16 @@ button a {
   background-color: floralwhite;
 }
 
+.oct {
+  background-color: rgb(254, 216, 176);
+  color: rgb(149, 99, 6);
+}
+
+.nov {
+  background-color: beige;
+  color:rgb(122, 101, 62);
+}
+
 iframe {
   opacity: 90%;
 }
